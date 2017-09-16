@@ -44,4 +44,6 @@ Copy Forwarding https: ví dụ ở đây là `https://58157de6.ngrok.io`.
 <img src = "https://i.imgur.com/cGF7ra6.png">
 Đến đây, việc cài đặt đã xong, dùng nick của chính mình để gửi tin nhắn bất kỳ đến cái fanpage vừa tạo. Nếu nhận được message phản hồi y hệt, 1 cái mặt cười thì là thành công.
 
+#### Xem thêm các hàm để gửi các loại message có thể gửi đi bằng cách đọc docs của [FB Chatbot Framework](https://www.npmjs.com/package/fb-bot-framework).
+
 **So easy nhỉ :v**
