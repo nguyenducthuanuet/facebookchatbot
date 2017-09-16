@@ -2,3 +2,6 @@
 .env
 /src/config/page_token.js
 .idea
+npm-debug.log
+package-lock.json
+.~lock.README.md.odt#
