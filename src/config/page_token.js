@@ -1,4 +1,4 @@
 export default {
-    page_token: "REPLACE WITH YOUR PAGE TOKEN",
+    page_token: "EAABosSWXgh0BABVZAuXMJZAlucNWuzIbyJpzU1v0c4YUyMLHOVEH51Gq7x8qUZCsUuR9ydQiYZBy4KYznwQZCiWkwzg6QCvEj2OmZAoCHSxRY6VPSmsMal8VXQpMWRc34giffj3shdpAZCKHUWsJjnw1Ixy3uYZCi1ZCQlZA38R21ZB7AZDZD",
     verify_token: "verify_token"
 }

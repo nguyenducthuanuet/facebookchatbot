@@ -4,7 +4,7 @@
   "description": "Facebook chatbot Web service",
   "main": "index.js",
   "scripts": {
-    "start": "node src/app.js",
+    "start": "babel-node src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -29,6 +29,7 @@
     "express": "^4.15.4",
     "fb-bot-framework": "^0.3.0",
     "lodash": "^4.17.4",
-    "morgan": "^1.8.2"
+    "morgan": "^1.8.2",
+    "rimraf": "^2.6.2"
   }
 }
