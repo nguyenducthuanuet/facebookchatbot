@@ -1,7 +1,7 @@
 const express = require('express');
 require('dotenv').config({path:'.env'});
 const bodyParser = require('body-parser');
-const page_token= require('./config/page_token');
+import page_token from './config/page_token';
 const FBBotFrameWork = require('fb-bot-framework');
 const app = express();
 const mysql = require('mysql');

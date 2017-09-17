@@ -34,7 +34,7 @@ Sau đó mở project của mình lên, vào file /src/config/page_token.js và 
 <img src = "https://i.imgur.com/xSMD3cb.png">
 
 5. Có một hộp thoại hiện lên, cứ để đấy. Nó yêu cầu nhập một URL gọi lại, lúc này ta cần bật server localhost lên và chạy Ngrok.
-Vào project chạy `npm start`, vào thư mục đã download ngrok, khởi chạy bằng cách: `./ngrok http 3000`. Ta được như sau:
+Vào project chạy `npm start`, vào thư mục đã download ngrok, khởi chạy bằng cách vào (với window thì chạy = cmd gốc, không chạy được bằng git bash): `./ngrok http 3000`. Ta được như sau:
 <img src = "https://i.imgur.com/7G0gUHP.png">
 
 Copy Forwarding https: ví dụ ở đây là `https://58157de6.ngrok.io`. 
@@ -43,5 +43,7 @@ Copy Forwarding https: ví dụ ở đây là `https://58157de6.ngrok.io`.
 - Trường gửi chọn *messages* và *messaging_postbacks*
 <img src = "https://i.imgur.com/cGF7ra6.png">
 Đến đây, việc cài đặt đã xong, dùng nick của chính mình để gửi tin nhắn bất kỳ đến cái fanpage vừa tạo. Nếu nhận được message phản hồi y hệt, 1 cái mặt cười thì là thành công.
+
+#### Xem thêm các hàm để gửi các loại message có thể gửi đi bằng cách đọc docs của [FB Chatbot Framework](https://www.npmjs.com/package/fb-bot-framework).
 
 **So easy nhỉ :v**
