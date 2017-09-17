@@ -1,13 +1,17 @@
 const express = require('express');
 require('dotenv').config({path:'.env'});
-const logger = require('morgan');
 const bodyParser = require('body-parser');
 const page_token= require('./config/page_token');
 const FBBotFrameWork = require('fb-bot-framework');
-
-var app = express();
-
-var bot = new FBBotFrameWork(page_token);
+const app = express();
+const mysql = require('mysql');
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'uet-contacts'
+});
+const bot = new FBBotFrameWork(page_token);
 
 
 //todo: Setup Express middleware for /webhook
@@ -15,82 +19,51 @@ app.use('/webhook', bot.middleware());
 
 //todo: Setup listener for incoming messages
 bot.on('message', function(userId, message){
-    console.log("message from id ", userId);
-    // bot.sendImageMessage(userId, 'https://scontent.fhan5-2.fna.fbcdn.net/v/t35.0-12/21767361_2011415915794628_148647750_o.png?oh=8167ab094538c908818f674d28b186cc&oe=59BE0D4B', 'REGULAR');
-    bot.sendTextMessage(userId, message);
-    // var text = "What do you want to do next?";
-    var buttons = [
-        {
-            "type": "web_url",
-            "url": "https://petersapparel.parseapp.com",
-            "title": "Show Website"
-        },
-        {
-            "type": "postback",
-            "title": "Start Chatting",
-            "payload": "USER_DEFINED_PAYLOAD"
-        }
-    ];
-    // bot.sendButtonMessage(userId, text, buttons);
-    var elements = [
-        {
-            "title": "Classic White T-Shirt",
-            "image_url": "http://petersapparel.parseapp.com/img/item100-thumb.png",
-            "subtitle": "Soft white cotton t-shirt is back in style",
-            "buttons": [
-                {
-                    "type": "web_url",
-                    "url": "https://petersapparel.parseapp.com/view_item?item_id=100",
-                    "title": "View Item"
-                },
-                {
-                    "type": "web_url",
-                    "url": "https://petersapparel.parseapp.com/buy_item?item_id=100",
-                    "title": "Buy Item"
-                },
-                {
-                    "type": "postback",
-                    "title": "Bookmark Item",
-                    "payload": "USER_DEFINED_PAYLOAD_FOR_ITEM100"
+    console.log(`message from id ${userId}: ${message}`);
+    // bot.sendTextMessage(userId, `Bạn vừa nhắn ${message}`);
+    connection.query(`SELECT * FROM humans WHERE name LIKE '%${message}%'`, function(err, rows, fields) {
+        if (rows.length === 0) {
+            bot.sendTextMessage(userId, `Không tìm thấy ai tên ${message}`)
+        } else {
+            let response = rows.map(human => {
+                return {
+                    title: human.name,
+                    buttons: [
+                        {
+                            type: 'postback',
+                            title: 'Chi tiết',
+                            payload: `DETAIL_HUMAN_${human.id}`
+                        }
+                    ]
                 }
-            ]
-        },
-        {
-            "title": "Classic Grey T-Shirt",
-            "image_url": "http://petersapparel.parseapp.com/img/item101-thumb.png",
-            "subtitle": "Soft gray cotton t-shirt is back in style",
-            "buttons": [
-                {
-                    "type": "web_url",
-                    "url": "https://petersapparel.parseapp.com/view_item?item_id=101",
-                    "title": "View Item"
-                },
-                {
-                    "type": "web_url",
-                    "url": "https://petersapparel.parseapp.com/buy_item?item_id=101",
-                    "title": "Buy Item"
-                },
-                {
-                    "type": "postback",
-                    "title": "Bookmark Item",
-                    "payload": "USER_DEFINED_PAYLOAD_FOR_ITEM101"
-                }
-            ]
+            });
+            bot.sendGenericMessage(userId, response);
         }
-    ];
+    });
+});
 
-    bot.sendGenericMessage(userId, elements);
+bot.on('postback', function(userId, payload) {
+    if (payload.startsWith('DETAIL_HUMAN_')) {
+        let id = parseInt(payload.replace('DETAIL_HUMAN_', ''));
+        bot.sendTextMessage(userId, `Bạn vừa chọn id=${id}`);
+    }
 });
 
 //todo: Test server in active
 app.get('/', function (req, res){
-    res.send('Welcome to Facebook Web Service api!');
+    // res.send("hello world");
+    let message = 'Hiếu'.toLowerCase();
+    connection.query(`SELECT * FROM humans WHERE name LIKE '%${message}%'`, function(err, rows, fields) {
+        if (err) throw err;
+        res.send(`${rows.length} results`);
+    });
 });
+
 //TODO: set port to run server
 app.set('port', 3000);
 app.use(bodyParser.urlencoded({extended: false}));
 
-var server = require('http').createServer(app);
+const server = require('http').createServer(app);
 
 //TODO: run server
 app.listen(app.get('port'), function(){
