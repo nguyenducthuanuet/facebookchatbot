@@ -15,12 +15,13 @@ app.use('/webhook', bot.middleware());
 bot.on('message', function(userId, message){
     console.log(`message from id ${userId}: ${message}`);
     dbworker.searchHuman(message, humans => {
-        if (humans.length === 0) {
-            bot.sendTextMessage(userId, `Không tìm thấy ai tên ${message}`)
-        } else {
+        if (humans.length) {
             let response = humans.map(human => {
+                let title = `${human.academic_title ? human.academic_title : ''} ${human.name}`;
+                console.log(title);
                 return {
-                    title: `${human.academic_title ? human.academic_title : ''} ${human.name}`,
+                    title: title,
+                    type: 'postback',
                     buttons: [
                         {
                             type: 'postback',
@@ -31,14 +32,25 @@ bot.on('message', function(userId, message){
                 }
             });
             bot.sendGenericMessage(userId, response);
+        } else {
+            bot.sendTextMessage(userId, `Không tìm thấy ai tên ${message}`)
         }
     });
 });
 
 bot.on('postback', function(userId, payload) {
+    console.log(`postback from id ${userId}: ${payload}`);
     if (payload.startsWith('DETAIL_HUMAN_')) {
         let id = parseInt(payload.replace('DETAIL_HUMAN_', ''));
-        bot.sendTextMessage(userId, `Bạn vừa chọn id=${id}`);
+        dbworker.detallHuman(id, function(details) {
+            if (details.length) {
+                let response = `${details[0].academic_title ? details[0].academic_title : ''} ${details[0].name}`;
+                if (details[0].department_name) {
+                    response += '\n' + details.map(detail => `${detail.position ? detail.position : 'làm việc'} tại ${detail.department_name}`).join('\n')
+                }
+                return bot.sendTextMessage(userId, response);
+            }
+        });
     }
 });
 
