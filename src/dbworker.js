@@ -7,23 +7,36 @@ const connection = mysql.createConnection({
 });
 
 export default {
-    searchHuman: (name, callback) => {
-        let query = `SELECT * FROM humans WHERE name LIKE '%${name}%'`;
+    searchHumans: (name, callback) => {
+        let query = `
+        SELECT id, academic_title, name 
+        FROM humans 
+        WHERE LOWER(name) LIKE BINARY '% ${name.toLowerCase()}' OR LOWER(name) = '${name.toLowerCase()}'`;
         console.log(query);
-        connection.query(query, function(err, rows, field) {
+        connection.query(query, (err, rows) => {
             callback(rows || []);
         })
     },
 
-    detallHuman: (id, callback) => {
+    detailHuman: (id, callback) => {
         let query = `
-        SELECT h.academic_title, h.name, hd.position, d.name department_name
-        FROM humans h 
-        LEFT JOIN humans_departments hd ON h.id = hd.human_id
-        LEFT JOIN departments d ON d.id = hd.department_id  
+        SELECT id, academic_title, name
+        FROM humans
         WHERE id = ${id}`;
         console.log(query);
-        connection.query(query, function(err, rows, field) {
+        connection.query(query, (err, rows) => {
+            callback(rows ? rows[0] : null);
+        })
+    },
+
+    humanOffices: (id, callback) => {
+        let query = `
+        SELECT hd.position, d.name department_name
+        FROM humans_departments hd
+        INNER JOIN departments d ON hd.department_id = d.id
+        WHERE hd.human_id = ${id}`;
+        console.log(query);
+        connection.query(query, (err, rows) => {
             callback(rows || []);
         })
     }
