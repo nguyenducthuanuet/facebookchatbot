@@ -2,7 +2,7 @@
  * Setup started button, greeting text, menu, v.v...
  * @param {FBBotFramework} bot
  */
-function bot_setup(bot) {
+function botSetup(bot) {
     bot.setGetStartedButton("GET_STARTED");
 
     let persistent_menu = [{
@@ -17,4 +17,4 @@ function bot_setup(bot) {
     bot.setPersistentMenu(persistent_menu);
 }
 
-export default bot_setup;
+export default botSetup;

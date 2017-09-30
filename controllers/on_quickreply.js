@@ -6,9 +6,9 @@ import routes from '../routes/quickreply';
  * @param {string} userId
  * @param {string} payload
  */
-function on_quickreply(bot, userId, payload) {
+function onQuickreply(bot, userId, payload) {
     console.log(`From ${userId}: ${payload}`);
     routes.get(payload)(bot, userId, payload);
 }
 
-export default on_quickreply;
+export default onQuickreply;

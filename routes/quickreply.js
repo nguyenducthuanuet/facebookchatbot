@@ -3,7 +3,7 @@ import routes_helper from '../helpers/routes';
 let routes = {
 };
 
-routes.has = name => routes_helper.has_route(routes, name);
-routes.get = name => routes_helper.get_route(routes, name);
+routes.has = name => routes_helper.hasRoute(routes, name);
+routes.get = name => routes_helper.getRoute(routes, name);
 
 export default routes;
