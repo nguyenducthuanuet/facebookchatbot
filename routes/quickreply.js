@@ -1,9 +1,14 @@
 import routes_helper from '../helpers/routes';
+import onSearchLecturers from '../controllers/on_search_lecturers';
+import detailLecture from '../controllers/detail_lecture';
 
 let routes = {
+    SEARCH_LECTURERS: onSearchLecturers,
+    LECTURER_: detailLecture
 };
 
-routes.has = name => routes_helper.hasRoute(routes, name);
-routes.get = name => routes_helper.getRoute(routes, name);
+let get = (payload, user) => routes_helper.getRoute(routes, payload) || function() {};
 
-export default routes;
+export default {
+    get: get
+};

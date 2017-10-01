@@ -1,11 +1,14 @@
 import mongoose from '../database/db';
-import messageSchema from './message';
+import message from './message';
 
 const userSchema = mongoose.Schema({
     profile: Object,
     userId: String,
-    messages: [messageSchema]
+    messages: [message.schema]
 });
 const User = mongoose.model('User', userSchema);
 
-export default User;
+export default {
+    schema: userSchema,
+    model: User
+};

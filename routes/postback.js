@@ -1,11 +1,14 @@
-import on_get_started from '../controllers/on_get_started';
+import onGetStarted from '../controllers/on_get_started';
+import onSearchLecturers from '../controllers/on_search_lecturers';
 import routes_helper from '../helpers/routes';
 
 let routes = {
-    GET_STARTED: on_get_started
+    GET_STARTED: onGetStarted,
+    SEARCH_LECTURERS: onSearchLecturers,
 };
 
-routes.has = name => routes_helper.hasRoute(routes, name);
-routes.get = name => routes_helper.getRoute(routes, name);
+let get = (payload, user=null) => routes_helper.getRoute(routes, payload) || function() {};
 
-export default routes;
+export default {
+    get: get
+};

@@ -5,4 +5,6 @@ const messageSchema = db.Schema({
     body: String
 });
 
-export default messageSchema;
+export default {
+    schema: messageSchema
+};
