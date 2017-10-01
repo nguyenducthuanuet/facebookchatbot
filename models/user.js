@@ -1,10 +1,12 @@
 import mongoose from '../database/db';
-import message from './message';
 
 const userSchema = mongoose.Schema({
     profile: Object,
     userId: String,
-    messages: [message.schema]
+    messages: [mongoose.Schema({
+        type: String,
+        body: String
+    })]
 });
 const User = mongoose.model('User', userSchema);
 

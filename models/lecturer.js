@@ -4,8 +4,15 @@ const lecturerSchema = mongoose.Schema({
     name: String,
     slug: String,
     academic_title: String,
-    departments: Array,
-    contacts: Array
+    departments: [mongoose.Schema({
+        position: String,
+        department: String
+    })],
+    contacts: [mongoose.Schema({
+        type: String,
+        info: String,
+        description: String
+    })]
 });
 const Lecturer = mongoose.model('Lecturer', lecturerSchema);
 
