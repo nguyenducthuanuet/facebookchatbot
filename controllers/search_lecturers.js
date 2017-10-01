@@ -16,6 +16,15 @@ function searchLecturers(bot, userId, message) {
                 title: 'Tra cứu GV khác',
                 payload: 'SEARCH_LECTURERS'
             }]);
+        } else if (count === 1) {
+            Lecturer.findOne(query).then(lecturer => {
+                let message = lecturer.toDetailMessage();
+                bot.sendQuickReplies(userId, message, [{
+                    content_type: 'text',
+                    title: 'Tra cứu GV khác',
+                    payload: 'SEARCH_LECTURERS'
+                }]);
+            })
         } else if (count <= 10) {
             Lecturer.find(query).then(lecturers => {
                 lecturers = lecturers.map(lecturer => lecturer.toQuickreply());
