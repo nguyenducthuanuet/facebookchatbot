@@ -30,3 +30,6 @@ app.listen(app.get('port'), function(){
     console.log("App is running...");
     console.log("Press Ctrl+C to stop");
 });
+
+import Seeder from './database/seeder';
+app.use('/seed', Seeder.run);
