@@ -8,7 +8,7 @@ const Lecturer = models.Lecturer;
  * @param {string} message
  */
 function searchLecturers(bot, userId, message) {
-    let query = {name: {$regex: `${message.trim()}$`, $options: "i"}};
+    let query = {name: {$regex: ` ${message.trim()}$`, $options: "i"}};
     Lecturer.count(query).then(count => {
         if (count === 0) {
             bot.sendQuickReplies(userId, `Không tìm thấy GV nào tên là ${message.trim()}`, [{
