@@ -12,7 +12,8 @@ const lecturerSchema = mongoose.Schema({
         type: String,
         info: String,
         description: String
-    })]
+    })],
+    research: String,
 });
 const Lecturer = mongoose.model('Lecturer', lecturerSchema);
 
@@ -38,13 +39,21 @@ Lecturer.prototype.toDetailMessage = function() {
         let description = c.description ? `(${c.description})`: '';
         return `- ${c.type} ${description}: ${c.info}`;
     }).join("\n");
-    return `${this.getNameWTitle()}
+    let str = `${this.getNameWTitle()}
 
 Nơi công tác:
 ${works}
 
 Liên hệ:
-${contacts}`
+${contacts}`;
+
+    if (this.research) {
+        str = `${str}
+        
+Hướng nghiên cứu:
+${this.research}`;
+    }
+    return str;
 };
 
 export default {
