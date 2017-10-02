@@ -27,15 +27,24 @@ function onGetStarted(bot, userId, payload) {
         user.profile = profile;
         user.save().then(user => {
             let replies = [{
-                content_type: 'text',
-                title: 'Tài liệu',
-                payload: 'SEARCH_DOCUMENTS'
+               content_type: 'text',
+               title: 'Tra cứu',
+               payload: 'SEARCH'
             }, {
                 content_type: 'text',
-                title: 'Giảng viên',
-                payload: 'SEARCH_LECTURERS'
+                title: 'Hỏi đáp',
+                payload: 'ASK'
             }];
-            bot.sendQuickReplies(userId, `Xin chào ${profile['last_name']} ${profile['first_name']}! Bạn muốn tra cứu thông tin gì?`, replies);
+            // let replies = [{
+            //     content_type: 'text',
+            //     title: 'Tài liệu',
+            //     payload: 'SEARCH_DOCUMENTS'
+            // }, {
+            //     content_type: 'text',
+            //     title: 'Giảng viên',
+            //     payload: 'SEARCH_LECTURERS'
+            // }];
+            bot.sendQuickReplies(userId, `Xin chào ${profile['last_name']} ${profile['first_name']}! Chúng tôi có thể giúp gì cho bạn?`, replies);
         });
     });
 }
