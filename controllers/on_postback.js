@@ -9,19 +9,17 @@ const User = models.User;
  * @param {string} userId
  * @param {string} payload
  */
-function onPostback(bot, userId, payload) {
+async function onPostback(bot, userId, payload) {
     console.log(`From ${userId}: ${payload}`);
     if (payload !== 'GET_STARTED') {
-        User.findOne({userId: userId}).then(user => {
-            user.messages.push({
-                type: 'postback',
-                body: payload
-            });
-            user.save().then(user => routes.get(payload, user)(bot, userId, payload));
+        let user = await User.findOne({userId: userId});
+        user.messages.push({
+            type: 'postback',
+            body: payload
         });
-    } else {
-        routes.get(payload)(bot, userId, payload);
+        await user.save();
     }
+    routes.get(payload)(bot, userId, payload);
 }
 
 export default onPostback;

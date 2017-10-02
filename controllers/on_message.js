@@ -8,17 +8,15 @@ const User = models.User;
  * @param {string} userId
  * @param {string} message
  */
-function onMessage(bot, userId, message) {
+async function onMessage(bot, userId, message) {
     console.log(`From ${userId}: ${message}`);
-    User.findOne({userId: userId}).then(user => {
-        user.messages.push({
-            type: 'message',
-            body: message
-        });
-        user.save().then(user => {
-            routes.get(message, user)(bot, userId, message);
-        });
+    let user = await User.findOne({userId: userId});
+    user.messages.push({
+        type: 'message',
+        body: message
     });
+    await user.save();
+    routes.get(message, user)(bot, userId, message);
 }
 
 export default onMessage;

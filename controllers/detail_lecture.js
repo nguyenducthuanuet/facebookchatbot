@@ -7,16 +7,15 @@ const Lecturer = models.Lecturer;
  * @param {string} userId
  * @param {string} payload LECTURER_slug
  */
-function detailLecture(bot, userId, payload) {
+async function detailLecture(bot, userId, payload) {
     let slug = payload.replace('LECTURER_', '');
-    Lecturer.findOne({slug: slug}).then(lecturer => {
-        let message = lecturer.toDetailMessage();
-        bot.sendQuickReplies(userId, message, [{
-            content_type: 'text',
-            title: 'Tra cứu GV khác',
-            payload: 'SEARCH_LECTURERS'
-        }]);
-    });
+    let lecturer = await Lecturer.findOne({slug: slug});
+    let message = lecturer.toDetailMessage();
+    bot.sendQuickReplies(userId, message, [{
+        content_type: 'text',
+        title: 'Tra cứu GV khác',
+        payload: 'SEARCH_LECTURERS'
+    }]);
 }
 
 export default detailLecture;

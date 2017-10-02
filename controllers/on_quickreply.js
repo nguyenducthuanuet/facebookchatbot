@@ -9,15 +9,15 @@ const User = models.User;
  * @param {string} userId
  * @param {string} payload
  */
-function onQuickreply(bot, userId, payload) {
+async function onQuickreply(bot, userId, payload) {
     console.log(`From ${userId}: ${payload}`);
-    User.findOne({userId: userId}).then(user => {
-        user.messages.push({
-            type: 'quickreply',
-            body: payload
-        });
-        user.save().then(user => routes.get(payload, user)(bot, userId, payload));
+    let user = await User.findOne({userId: userId});
+    user.messages.push({
+        type: 'quickreply',
+        body: payload
     });
+    await user.save();
+    routes.get(payload, user)(bot, userId, payload);
 }
 
 export default onQuickreply;
