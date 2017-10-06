@@ -3,6 +3,7 @@ import detailLecture from './detail_lecture';
 import onReset from './on_reset';
 import onMenuSearch from './on_menu_search';
 import onMenuQA from './on_menu_qa';
+import onMenuDirectQA from  './on_menu_direct_qa';
 import models from '../models/models';
 
 const User = models.User;
@@ -37,6 +38,10 @@ async function onQuickreply(bot, userId, payload) {
         }
         case "MENU_QA": {
             await onMenuQA(bot, userId);
+            break;
+        }
+        case "DIRECT_QA": {
+            await onMenuDirectQA(bot, userId);
             break;
         }
         default: {
