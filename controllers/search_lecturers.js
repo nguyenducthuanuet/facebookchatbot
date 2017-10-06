@@ -4,8 +4,8 @@ const Lecturer = models.Lecturer;
 /**
  *
  * @param {FBBotFramework} bot
- * @param {string} userId
- * @param {string} message
+ * @param {String} userId
+ * @param {String} message
  */
 async function searchLecturers(bot, userId, message) {
     let query = {name: {$regex: `${message.trim()}$`, $options: "i"}};

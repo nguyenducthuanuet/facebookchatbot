@@ -5,8 +5,8 @@ const User = models.User;
 /**
  *
  * @param {FBBotFramework} bot
- * @param {string} userId
- * @param {string} payload "GET_STARTED"
+ * @param {String} userId
+ * @param {String} payload "GET_STARTED"
  */
 async function onGetStarted(bot, userId, payload) {
     await User.remove({userId: userId});

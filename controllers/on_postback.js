@@ -9,8 +9,8 @@ const User = models.User;
 /**
  *
  * @param {FBBotFramework} bot
- * @param {string} userId
- * @param {string} payload
+ * @param {String} userId
+ * @param {String} payload
  */
 async function onPostback(bot, userId, payload) {
     console.log(`From ${userId}: ${payload}`);

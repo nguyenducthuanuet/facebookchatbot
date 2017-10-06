@@ -1,7 +1,7 @@
 /**
  *
  * @param {FBBotFramework} bot
- * @param {string} userId
+ * @param {String} userId
  */
 async function onReset(bot, userId) {
     let replies = [{

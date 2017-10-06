@@ -3,6 +3,7 @@ import detailLecture from './detail_lecture';
 import onReset from './on_reset';
 import onMenuSearch from './on_menu_search';
 import onMenuQA from './on_menu_qa';
+import onSearchFAQ from './on_search_faq';
 import models from '../models/models';
 
 const User = models.User;
@@ -10,8 +11,8 @@ const User = models.User;
 /**
  *
  * @param {FBBotFramework} bot
- * @param {string} userId
- * @param {string} payload
+ * @param {String} userId
+ * @param {String} payload
  */
 async function onQuickreply(bot, userId, payload) {
     console.log(`From ${userId}: ${payload}`);
@@ -37,6 +38,10 @@ async function onQuickreply(bot, userId, payload) {
         }
         case "MENU_QA": {
             await onMenuQA(bot, userId);
+            break;
+        }
+        case "FAQ": {
+            await onSearchFAQ(bot, userId);
             break;
         }
         default: {

@@ -4,8 +4,8 @@ const Lecturer = models.Lecturer;
 /**
  *
  * @param {FBBotFramework} bot
- * @param {string} userId
- * @param {string} payload LECTURER_slug
+ * @param {String} userId
+ * @param {String} payload LECTURER_slug
  */
 async function detailLecture(bot, userId, payload) {
     let slug = payload.replace('LECTURER_', '');

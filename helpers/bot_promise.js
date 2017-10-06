@@ -5,7 +5,10 @@ class BotPromise extends FBBotFramework {
         return new Promise((resolve, reject) => {
             try {
                 super.sendTextMessage(userId, text, notificationType, (err, result) => {
-                    if (err) reject(err);
+                    if (err) {
+                        console.log(err);
+                        reject(err);
+                    }
                     resolve(result);
                 });
             } catch(e) {
@@ -18,7 +21,10 @@ class BotPromise extends FBBotFramework {
         return new Promise((resolve, reject) => {
             try {
                 super.sendImageMessage(userId, imageUrl, notificationType, (err, result) => {
-                    if (err) reject(err);
+                    if (err) {
+                        console.log(err);
+                        reject(err);
+                    }
                     resolve(result);
                 });
             } catch(e) {
@@ -31,7 +37,10 @@ class BotPromise extends FBBotFramework {
         return new Promise((resolve, reject) => {
             try {
                 super.sendAudioAttachment(userId, audioUrl, notificationType, (err, result) => {
-                    if (err) reject(err);
+                    if (err) {
+                        console.log(err);
+                        reject(err);
+                    }
                     resolve(result);
                 });
             } catch(e) {
@@ -44,7 +53,10 @@ class BotPromise extends FBBotFramework {
         return new Promise((resolve, reject) => {
             try {
                 super.sendVideoAttachment(userId, videoUrl, notificationType, (err, result) => {
-                    if (err) reject(err);
+                    if (err) {
+                        console.log(err);
+                        reject(err);
+                    }
                     resolve(result);
                 });
             } catch(e) {
@@ -57,7 +69,10 @@ class BotPromise extends FBBotFramework {
         return new Promise((resolve, reject) => {
             try {
                 super.sendFileAttachment(userId, fileUrl, notificationType, (err, result) => {
-                    if (err) reject(err);
+                    if (err) {
+                        console.log(err);
+                        reject(err);
+                    }
                     resolve(result);
                 });
             } catch(e) {
@@ -70,7 +85,10 @@ class BotPromise extends FBBotFramework {
         return new Promise((resolve, reject) => {
             try {
                 super.sendButtonMessage(userId, text, buttons, notificationType, (err, result) => {
-                    if (err) reject(err);
+                    if (err) {
+                        console.log(err);
+                        reject(err);
+                    }
                     resolve(result);
                 });
             } catch(e) {
@@ -83,7 +101,10 @@ class BotPromise extends FBBotFramework {
         return new Promise((resolve, reject) => {
             try {
                 super.sendGenericMessage(userId, elements, notificationType, (err, result) => {
-                    if (err) reject(err);
+                    if (err) {
+                        console.log(err);
+                        reject(err);
+                    }
                     resolve(result);
                 });
             } catch(e) {
@@ -96,7 +117,10 @@ class BotPromise extends FBBotFramework {
         return new Promise((resolve, reject) => {
             try {
                 super.sendBubbleMessage(userId, elements, notificationType, (err, result) => {
-                    if (err) reject(err);
+                    if (err) {
+                        console.log(err);
+                        reject(err);
+                    }
                     resolve(result);
                 });
             } catch(e) {
@@ -109,7 +133,10 @@ class BotPromise extends FBBotFramework {
         return new Promise((resolve, reject) => {
             try {
                 super.sendReceiptMessage(userId, receipt, notificationType, (err, result) => {
-                    if (err) reject(err);
+                    if (err) {
+                        console.log(err);
+                        reject(err);
+                    }
                     resolve(result);
                 });
             } catch(e) {
@@ -122,7 +149,10 @@ class BotPromise extends FBBotFramework {
         return new Promise((resolve, reject) => {
             try {
                 super.sendLocationRequest(userId, text, notificationType, (err, result) => {
-                    if (err) reject(err);
+                    if (err) {
+                        console.log(err);
+                        reject(err);
+                    }
                     resolve(result);
                 });
             } catch(e) {
@@ -135,7 +165,10 @@ class BotPromise extends FBBotFramework {
         return new Promise((resolve, reject) => {
             try {
                 super.sendQuickReplies(userId, text, replies, notificationType, (err, result) => {
-                    if (err) reject(err);
+                    if (err) {
+                        console.log(err);
+                        reject(err);
+                    }
                     resolve(result);
                 });
             } catch(e) {
@@ -148,7 +181,10 @@ class BotPromise extends FBBotFramework {
         return new Promise((resolve, reject) => {
             try {
                 super.sendListMessage(userId, elements, notificationType, (err, result) => {
-                    if (err) reject(err);
+                    if (err) {
+                        console.log(err);
+                        reject(err);
+                    }
                     resolve(result);
                 });
             } catch(e) {
@@ -161,7 +197,10 @@ class BotPromise extends FBBotFramework {
         return new Promise((resolve, reject) => {
             try {
                 super.getUserProfile(userId, (err, profile) => {
-                    if (err) reject(err);
+                    if (err) {
+                        console.log(err);
+                        reject(err);
+                    }
                     resolve(profile);
                 })
             } catch (e) {

@@ -1,12 +1,13 @@
 import models from '../models/models';
 import search_lecturers from './search_lecturers';
+import search_faq from './search_faq';
 const User = models.User;
 
 /**
  *
  * @param {FBBotFramework} bot
- * @param {string} userId
- * @param {string} message
+ * @param {String} userId
+ * @param {String} message
  */
 async function onMessage(bot, userId, message) {
     console.log(`From ${userId}: ${message}`);
@@ -19,8 +20,15 @@ async function onMessage(bot, userId, message) {
     });
     await user.save();
 
-    if (last_action.body === 'SEARCH_LECTURERS') {
-        await search_lecturers(bot, userId, message);
+    switch (last_action.body) {
+        case "SEARCH_LECTURERS": {
+            await search_lecturers(bot, userId, message);
+            break;
+        }
+        case "FAQ": {
+            await search_faq(bot, userId, message);
+            break;
+        }
     }
 }
 
