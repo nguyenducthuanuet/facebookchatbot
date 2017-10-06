@@ -7,16 +7,16 @@ function botSetup(bot) {
 
     let persistent_menu = [{
         type: 'postback',
-        title: 'Tra cứu tài liệu',
-        payload: 'SEARCH_DOCUMENTS'
+        title: '🔎 Tra cứu',
+        payload: "MENU_SEARCH"
     }, {
         type: 'postback',
-        title: 'Tra cứu giảng viên',
-        payload: 'SEARCH_LECTURERS'
+        title: '❓ Hỏi đáp',
+        payload: "MENU_QA"
     }, {
-        "type": "web_url",
-        "title": "Đóng góp thông tin",
-        "url": "https://goo.gl/AZtQtN"
+        type: "web_url",
+        title: "Đóng góp thông tin",
+        url: "https://goo.gl/AZtQtN"
     }];
     bot.setPersistentMenu(persistent_menu);
 }

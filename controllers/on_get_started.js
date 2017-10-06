@@ -1,5 +1,4 @@
 import models from '../models/models';
-import botPromise from '../helpers/bot_promise';
 
 const User = models.User;
 
@@ -7,7 +6,7 @@ const User = models.User;
  *
  * @param {FBBotFramework} bot
  * @param {string} userId
- * @param {string} payload : GET_STARTED
+ * @param {string} payload "GET_STARTED"
  */
 async function onGetStarted(bot, userId, payload) {
     await User.remove({userId: userId});
@@ -20,21 +19,21 @@ async function onGetStarted(bot, userId, payload) {
             body: payload
         }]
     });
-    let getUserProfile = botPromise.getUserProfile(bot, userId);
+    let getUserProfile = bot.getUserProfile(userId);
     let [user, profile] = await Promise.all([createUser, getUserProfile]);
 
     user.profile = profile;
     await user.save();
     let replies = [{
         content_type: 'text',
-        title: 'Tài liệu',
-        payload: 'SEARCH_DOCUMENTS'
+        title: '🔎 Tra cứu',
+        payload: 'MENU_SEARCH'
     }, {
         content_type: 'text',
-        title: 'Giảng viên',
-        payload: 'SEARCH_LECTURERS'
+        title: '❓ Hỏi đáp',
+        payload: 'MENU_QA'
     }];
-    bot.sendQuickReplies(userId, `Xin chào ${profile['last_name']} ${profile['first_name']}! Bạn muốn tra cứu thông tin gì?`, replies);
+    await bot.sendQuickReplies(userId, `Xin chào ${profile['last_name']} ${profile['first_name']}! Vui lòng chọn chức năng bạn muốn sử dụng?`, replies);
 }
 
 export default onGetStarted;

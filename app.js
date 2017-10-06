@@ -5,7 +5,7 @@ const app = express();
 const bodyParser = require('body-parser');
 import appConfig from './config/app_config';
 
-const FBBotFramework = require('fb-bot-framework');
+import FBBotFramework from './helpers/bot_promise'
 import botConfig from './config/bot_config';
 const bot = new FBBotFramework(botConfig);
 import botSetup from './controllers/bot_setup';

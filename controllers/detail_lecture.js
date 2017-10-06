@@ -11,7 +11,7 @@ async function detailLecture(bot, userId, payload) {
     let slug = payload.replace('LECTURER_', '');
     let lecturer = await Lecturer.findOne({slug: slug});
     let message = lecturer.toDetailMessage();
-    bot.sendQuickReplies(userId, message, [{
+    await bot.sendQuickReplies(userId, message, [{
         content_type: 'text',
         title: 'Tra cứu GV khác',
         payload: 'SEARCH_LECTURERS'
