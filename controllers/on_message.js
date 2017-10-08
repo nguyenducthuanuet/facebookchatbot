@@ -1,7 +1,8 @@
 import models from '../models/models';
 import search_lecturers from './search_lecturers';
 import search_faq from './search_faq';
-import axios from 'axios';
+import search_document from './search_document';
+import search_subject from './search_subject';
 const User = models.User;
 
 /**
@@ -12,52 +13,6 @@ const User = models.User;
  */
 async function onMessage(bot, userId, message) {
 
-
-    // var elements = [
-    //     {
-    //         "title": "Classic Grey T-Shirt",
-    //         "subtitle": "Soft gray cotton t-shirt is back in style",
-    //         "default_action": {
-    //             "type": "web_url",
-    //             "url": "https://d758a3fd.ngrok.io",
-    //             "messenger_extensions": true,
-    //             "webview_height_ratio": "tall",
-    //         },
-    //         "buttons": [
-    //             {
-    //                 "type": "web_url",
-    //                 "url": "https://d758a3fd.ngrok.io",
-    //                 "title": "View Item",
-    //                 "webview_height_ratio": "tall",
-    //                 "messenger_extensions": true,
-    //                 "fallback_url": "https://d758a3fd.ngrok.io/"
-    //             }
-    //         ]
-    //     },
-    //     {
-    //         "title": "Classic Grey T-Shirt",
-    //         "subtitle": "Soft gray cotton t-shirt is back in style",
-    //         "default_action": {
-    //             "type": "web_url",
-    //             "url": "https://peterssendreceiveapp.ngrok.io/shop_collection",
-    //             "messenger_extensions": true,
-    //             "webview_height_ratio": "tall",
-    //             "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
-    //         },
-    //         "buttons": [
-    //             {
-    //                 "type": "web_url",
-    //                 "url": "https://peterssendreceiveapp.ngrok.io/collection",
-    //                 "title": "View Item",
-    //                 "webview_height_ratio": "tall",
-    //                 "messenger_extensions": true,
-    //                 "fallback_url": "https://peterssendreceiveapp.ngrok.io/"
-    //             }
-    //         ]
-    //     }
-    // ];
-    //
-    // bot.sendGenericMessage(userId, elements);
     console.log(`From ${userId}: ${message}`);
 
     let user = await User.findOne({userId: userId});
@@ -76,6 +31,13 @@ async function onMessage(bot, userId, message) {
         case "FAQ": {
             await search_faq(bot, userId, message);
             break;
+        }
+        case "SEARCH_DOCUMENTS" :{
+            await search_document(bot, userId, message);
+            break;
+        }
+        case "SEARCH_SUBJECTS" :{
+            await search_subject(bot, userId, message);
         }
     }
 }

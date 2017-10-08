@@ -6,6 +6,8 @@ import onMenuDirectQA from './on_menu_direct_qa';
 import onSearchFAQ from './on_search_faq';
 import onMenuSearch from './on_menu_search';
 import onMenuQA from './on_menu_qa';
+import onSearchDocument from './on_search_document';
+import onSearchSubject from './on_search_subject';
 
 const User = models.User;
 
@@ -55,6 +57,13 @@ async function onPostback(bot, userId, payload) {
             case "FAQ": {
                 await onSearchFAQ(bot, userId);
                 break;
+            }
+            case "SEARCH_DOCUMENTS":{
+                await onSearchDocument(bot, userId);
+                break;
+            }
+            case "SEARCH_SUBJECTS":{
+                await onSearchSubject(bot, userId);
             }
         }
     }

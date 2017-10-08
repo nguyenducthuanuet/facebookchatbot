@@ -17,15 +17,44 @@ const bootbot = new BootBot({
     appSecret: 'FB_APP_SECRET'
 });
 
+app.get(`/subjects/:id`, function (req, res) {
+    let id = req.params.id;
+    axios.get(`http://sguet.com/api/subjects/${id}`)
+        .then(response => {
+            let code = `<b>Mã môn học</b>: ${response.data.code}<br>`;
+            let VietnameseName = `<b>Tên tiếng Việt</b>: ${response.data.name}<br>`;
+            let EnglishName = `<b>Tên tiếng Anh</b>: ${response.data.name_en}<br>`;
+            let credits = `<b>Số tín chỉ</b>: ${response.data.credits}<br>`;
+            let theoryHours = `<b>Số giờ lý thuyết</b>: ${response.data.theory_credit_hours}<br>`;
+            let practiceHours = `<b>Số giờ bài tập</b>: ${response.data.practice_credit_hours}<br>`;
+            let selfHours = `<b>Số giờ tự học</b>: ${response.data.self_study_credit_hours}<br>`;
+            let preSubject = `<b>Học phần tiên quyết</b>: ${response.data.pre_subject_code}<br>`;
+            let abstract = `<b>Mô tả</b>:<br> ${response.data.abstract}`;
+            res.send(`<span style="display: flex; justify-content: center;"><b>${response.data.name}</b></span><br>
+                        ${code}
+                        ${VietnameseName}
+                        ${EnglishName}
+                        ${credits}
+                        ${theoryHours}
+                        ${practiceHours}
+                        ${selfHours}
+                        ${preSubject}
+                        ${abstract}`
+            );
+        })
+        .catch(e => console.log("e", e));
+});
+
 app.get(`/faqs/:id`, function (req, res) {
     let id = req.params.id;
     axios.get(`http://sguet.com/api/faqs/${id}`)
         .then(response => {
             let answer = response.data.answer;
-            res.send(answer);
+            res.send(`<span style="display: flex; justify-content: center;"><b>${response.data.name}</b></span><br>${answer}`);
         })
         .catch(e => console.log("e", e));
 });
+
 
 import botSetup from './controllers/bot_setup';
 import onMessage from './controllers/on_message';
