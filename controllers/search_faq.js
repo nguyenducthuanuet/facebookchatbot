@@ -1,5 +1,6 @@
 const request = require('request-promise');
-
+import {sendAnswerFaq} from "../helpers/botSendAnswerFaq";
+import axios from 'axios';
 /**
  *
  * @param {FBBotFramework} bot
@@ -8,27 +9,11 @@ const request = require('request-promise');
  */
 async function searchFaq(bot, userId, message) {
     let query = encodeURI(message);
-
-    await bot.sendButtonMessage(userId, 'Xem kết quả tại đây', [{
-        type: "web_url",
-        url: `http://sguet.com?query=${query}`,
-        title: 'Xem kết quả'
-    }]);
-
-    let endReplies = [{
-        content_type: 'text',
-        title: 'Nhập từ khoá khác',
-        payload: 'FAQ'
-    }, {
-        content_type: 'text',
-        title: 'Chức năng khác',
-        payload: 'RESET'
-    }];
-    await bot.sendQuickReplies(userId, 'Tiếp tục?', endReplies);
-
-    let response = await request(`http://sguet.com/api/faqs/search?query=${query}`);
-    response = JSON.parse(response);
-    console.log(response.length);
+    axios.get((`http://sguet.com/api/faqs/search?query=${query}`))
+        .then(res => {
+            let answers = res.data;
+            sendAnswerFaq(bot, userId, answers);
+        });
 }
 
 export default searchFaq;

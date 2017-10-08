@@ -25,7 +25,7 @@ async function onQuickreply(bot, userId, payload) {
     await user.save();
 
     switch (payload) {
-        case "SEARCH_LECTURERS": {
+        case "CONTACT": {
             await onSearchLecturers(bot, userId);
             break;
         }
