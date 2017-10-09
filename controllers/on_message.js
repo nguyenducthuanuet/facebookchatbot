@@ -24,7 +24,7 @@ async function onMessage(bot, userId, message) {
     await user.save();
 
     switch (last_action.body) {
-        case "SEARCH_LECTURERS": {
+        case "CONTACT": {
             await search_lecturers(bot, userId, message);
             break;
         }
