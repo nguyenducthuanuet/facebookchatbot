@@ -16,10 +16,11 @@ const bootbot = new BootBot({
     verifyToken: botConfig.verify_token,
     appSecret: 'FB_APP_SECRET'
 });
+import api from './config/api_config';
 
 app.get(`/subjects/:id`, function (req, res) {
     let id = req.params.id;
-    axios.get(`http://sguet.com/api/subjects/${id}`)
+    axios.get(`${api.search_host}/api/subjects/${id}`)
         .then(response => {
             let code = `<b>Mã môn học</b>: ${response.data.code}<br>`;
             let VietnameseName = `<b>Tên tiếng Việt</b>: ${response.data.name}<br>`;
@@ -47,7 +48,7 @@ app.get(`/subjects/:id`, function (req, res) {
 
 app.get(`/faqs/:id`, function (req, res) {
     let id = req.params.id;
-    axios.get(`http://sguet.com/api/faqs/${id}`)
+    axios.get(`${api.search_host}/api/faqs/${id}`)
         .then(response => {
             let answer = response.data.answer;
             res.send(`<span style="display: flex; justify-content: center;"><b>${response.data.name}</b></span><br>${answer}`);
