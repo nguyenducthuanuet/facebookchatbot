@@ -31,7 +31,7 @@ async function onPostback(bot, userId, payload) {
         await user.save();
 
         switch (payload) {
-            case "CONTACT": {
+            case "SEARCH_LECTURERS": {
                 await onSearchLecturers(bot, userId);
                 break;
             }

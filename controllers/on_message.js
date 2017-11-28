@@ -3,6 +3,7 @@ import search_lecturers from './search_lecturers';
 import search_faq from './search_faq';
 import search_document from './search_document';
 import search_subject from './search_subject';
+import onReset from './on_reset';
 const User = models.User;
 
 /**
@@ -24,7 +25,7 @@ async function onMessage(bot, userId, message) {
     await user.save();
 
     switch (last_action.body) {
-        case "CONTACT": {
+        case "SEARCH_LECTURERS": {
             await search_lecturers(bot, userId, message);
             break;
         }
@@ -39,6 +40,9 @@ async function onMessage(bot, userId, message) {
         case "SEARCH_SUBJECTS" :{
             await search_subject(bot, userId, message);
         }
+        default:
+            await onReset(bot, userId);
+            break;
     }
 }
 
